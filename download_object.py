@@ -1,7 +1,26 @@
 import boto3
+import os
+from List_objects import list_object_keys
 
-s3 = boto3.client('s3')
+def download_single_object(client, bucket, key, filename):
+    client.download_file(bucket, key, filename)
 
-s3.download_file('tpuntillo-boto3-06122023', 'test_text_string.txt', 'test_text_string.txt')
+if __name__ == '__main__':
 
+    bucket = 'tpuntillo-boto3-06122023'
+    key = 'test_text_string.txt'
+    filename = 'test_text_string.txt'
 
+    s3 = boto3.client('s3')
+
+    keys = list_object_keys(s3, bucket, prefix='folder/')
+    
+    for key in keys:
+        if '/' == key[-1]:
+            try:
+                os.mkdir(key)
+            except:
+                pass
+        else:
+            download_single_object(s3, bucket, key, key)
+    print(keys)
