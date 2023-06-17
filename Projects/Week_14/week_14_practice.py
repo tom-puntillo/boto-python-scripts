@@ -19,11 +19,11 @@ for reservation in response["Reservations"]:
         if instance["State"]["Name"] == 'running':
             print(instance["InstanceId"])
             
-            
-    response = ec2.stop_instances(
+    if "InstanceId" == ide_id:
+        pass        
+    else ec2.stop_instances(
         InstanceIds=[instance["InstanceId"]])
-        if "InstanceId" == ide_id:
-            pass
+    
             
     
             
