@@ -18,7 +18,7 @@ def main():
     kill_all()
 ec2 = boto3.client('ec2')
 
-ide_id = 'i-0655792865e66712d'
+ide_id = 'i-0cd54c8eee80de55c'
 
 response = ec2.describe_instances()
 
